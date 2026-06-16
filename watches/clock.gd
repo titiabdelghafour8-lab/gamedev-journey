@@ -1,4 +1,6 @@
-extends Node2D
+class_name Clock
+
+extends RigidBody2D
 
 enum StartTimerState 
 {
@@ -19,13 +21,24 @@ enum StartTimerState
 @export_range(0, 59) var start_second: int= 0
 
 
-@onready var seconds_arm := $SecondsArm as Node2D
-@onready var hours_arm := $HoursArm as Node2D
-@onready var minutes_arm := $"MinutesArm" as Node2D
+@export_group("Nodes")
+@export var collision_shape : CollisionShape2D
+@export var visualization : Node2D
+@export_subgroup("Arms")
+@export var seconds_arm : Node2D
+@export var minutes_arm : Node2D
+@export var hours_arm : Node2D
+
 
 var seconds := 0.0 
 var start_time := Dictionary()
 
+
+func set_uniform_scale(scale_factor: float) -> void:
+	var scale_vector = Vector2(scale_factor, scale_factor)
+	collision_shape.scale = scale_vector
+	visualization.scale = scale_vector
+	mass = scale_factor * scale_factor
 
 func _ready():
 	if time_state == StartTimerState.RANDOM_TIME:

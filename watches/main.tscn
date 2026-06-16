@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://db8q1n6b4qe0c"]
+
+[ext_resource type="Script" uid="uid://dugajsk46eaag" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://p0r0eil0q3m2" path="res://Clock.tscn" id="2_0xm2m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+
+[node name="Main" type="Node2D" unique_id=227460720]
+script = ExtResource("1_ig7tw")
+clock_scene = ExtResource("2_0xm2m")
+
+[node name="Bottom" type="Area2D" parent="." unique_id=283073762]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom" unique_id=1518709972]
+shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=470572314]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=458921290]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=894622791]
+wait_time = 0.2
+autostart = true
+
+[connection signal="body_entered" from="Bottom" to="." method="_on_buttom_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
