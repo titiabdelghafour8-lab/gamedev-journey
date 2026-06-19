@@ -55,7 +55,9 @@ func _ready():
 	
 func _process(delta: float):
 	seconds += delta * time_scale
-	seconds_arm.rotation = fmod(seconds, 60.0) * TAU / 60.0
+	var s :=  fmod(seconds, 60.0) / 60.0
+	seconds_arm.rotation = s * TAU
 	minutes_arm.rotation = fmod(seconds / 60.0, 60.0) * TAU / 60.0
-	hours_arm.rotation = fmod(seconds / 3600.0, 12.0)	* TAU / 12.0
+	hours_arm.rotation = fmod(seconds / 3600.0, 12.0) * TAU / 12.0
+
 	

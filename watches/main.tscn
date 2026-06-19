@@ -7,9 +7,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 
-[node name="Main" type="Node2D" unique_id=227460720]
+[node name="Main" type="Node2D" unique_id=227460720 node_paths=PackedStringArray("bottom", "ground", "ground_shape")]
 script = ExtResource("1_ig7tw")
 clock_scene = ExtResource("2_0xm2m")
+bottom = NodePath("Bottom")
+ground = NodePath("Ground")
+ground_shape = NodePath("Ground/CollisionShape2D")
 
 [node name="Bottom" type="Area2D" parent="." unique_id=283073762]
 
