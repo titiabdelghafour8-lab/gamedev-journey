@@ -11,18 +11,21 @@ radius = 128.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ik47v"]
 shader = ExtResource("2_ik47v")
+shader_parameter/second_color = Color(0.5, 0, 0, 1)
+shader_parameter/minute_color = Color(0, 0.5, 0, 1)
+shader_parameter/hour_color = Color(0, 0, 0.5, 1)
 
-[sub_resource type="Gradient" id="Gradient_t8egv"]
-offsets = PackedFloat32Array(0.98, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_ik47v"]
+offsets = PackedFloat32Array(0.36792454, 0.5188679, 0.6367925)
+colors = PackedColorArray(1, 1, 1, 1, 0.49773747, 0.76208615, 0.49773747, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7u8sl"]
-gradient = SubResource("Gradient_t8egv")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ik47v"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i3scw"]
 width = 256
 height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
+noise = SubResource("FastNoiseLite_ik47v")
+color_ramp = SubResource("Gradient_ik47v")
 
 [node name="Clock" type="RigidBody2D" unique_id=780247769 node_paths=PackedStringArray("collision_shape", "visualization", "seconds_arm", "minutes_arm", "hours_arm")]
 position = Vector2(576, 324)
@@ -39,7 +42,7 @@ shape = SubResource("CircleShape2D_7u8sl")
 
 [node name="Visualization" type="Sprite2D" parent="." unique_id=966196432]
 material = SubResource("ShaderMaterial_ik47v")
-texture = SubResource("GradientTexture2D_7u8sl")
+texture = SubResource("NoiseTexture2D_i3scw")
 
 [node name="Hour0" type="Polygon2D" parent="Visualization" unique_id=840066219]
 color = Color(0.95686275, 0, 0, 1)

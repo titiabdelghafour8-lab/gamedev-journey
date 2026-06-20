@@ -49,6 +49,7 @@ func _ready():
 			seconds = current_time.hour * 3600 + current_time.minute * 60 + current_time.second
 		if time_state != StartTimerState.FIXED_TIME:
 			seconds += start_hour * 3600 + start_minute * 60 + start_second	
+	visualization.self_modulate.a = randf()
 	
 	
 
@@ -56,8 +57,9 @@ func _ready():
 func _process(delta: float):
 	seconds += delta * time_scale
 	var s :=  fmod(seconds, 60.0) / 60.0
+	var m := fmod(seconds / 60.0, 60.0) / 60.0
+	var h := fmod(seconds / 3600.0, 12.0) / 12.0
 	seconds_arm.rotation = s * TAU
-	minutes_arm.rotation = fmod(seconds / 60.0, 60.0) * TAU / 60.0
-	hours_arm.rotation = fmod(seconds / 3600.0, 12.0) * TAU / 12.0
-
-	
+	minutes_arm.rotation = m * TAU
+	hours_arm.rotation =  h * TAU
+	visualization.self_modulate = Color(s, m, h, visualization.self_modulate.a)
